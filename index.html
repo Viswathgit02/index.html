@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Celebration</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@500&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #ffdde1);
+            background-size: 300% 300%;
+            animation: backgroundShift 15s ease infinite;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        @keyframes backgroundShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            color: #ffd700;
+            margin-top: 50px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        p {
+            font-size: 1.6rem;
+            max-width: 70%;
+            margin: 20px auto;
+            line-height: 1.8;
+            color: #f9f9f9;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .highlight {
+            color: #ff6bcb;
+            font-weight: bold;
+            text-shadow: 0 3px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 40px;
+            font-size: 1.4rem;
+            background: linear-gradient(to right, #ff6a95, #ff9a9e);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(to right, #ff9a9e, #ff6a95);
+            transform: scale(1.1);
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -10%;
+            width: 60px;
+            height: 80px;
+            background: radial-gradient(circle, #ff6a95, #ff9a9e);
+            border-radius: 50%;
+            animation: floatUp 10s infinite linear;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .balloon::before {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background: #fff;
+            transform: translateX(-50%);
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-120vh) rotate(360deg); }
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #ff6bcb;
+            animation: heartFall 5s infinite ease-in;
+            z-index: 0;
+        }
+
+        @keyframes heartFall {
+            0% { transform: translateY(-100px); opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .broken-heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #ff0000;
+            animation: brokenHeartFall 5s infinite ease-in;
+            z-index: 0;
+        }
+
+        @keyframes brokenHeartFall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        #response {
+            font-size: 1.8rem;
+            color: #fff;
+            margin-top: 20px;
+            animation: fadeIn 2s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-50px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .heartbroken {
+            background: linear-gradient(to bottom, #2e2e2e, #000);
+            color: #ff6bcb;
+            transition: background 2s ease;
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem; /* Smaller headline for mobile */
+                margin-top: 30px;
+            }
+            p {
+                font-size: 1.2rem; /* Adjust font size for readability */
+                max-width: 90%;
+            }
+            .button {
+                padding: 10px 30px; /* Smaller button padding for mobile */
+                font-size: 1rem;
+            }
+            .balloon {
+                width: 40px; /* Smaller balloons for mobile */
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Birthday Page Content -->
+    <div id="birthday-page">
+        <h1>🎉 Happy Birthday Sneha! 🎂</h1>
+        <p>Happy Birthday to the most special part of my code! 🎉</p>
+        <p>You’re the <span class="highlight">best feature</span> of my life’s algorithm.</p>
+        <p>Wishing you endless happiness, just like an <span class="highlight">infinite loop of love! 💖</span></p>
+        <button class="button" onclick="goToProposal()">Next</button>
+        <div id="balloons"></div>
+    </div>
+
+    <!-- Proposal Page Content -->
+    <div id="proposal-page" style="display:none;">
+        <h1 id="heading">Will You Be My Lifelong Compiler? 💖</h1>
+        <p>You're the <span class="highlight">most important line of my code</span>, and I'd love to <span class="highlight">execute life with you forever</span>! 💻</p>
+        <div>
+            <button class="button" onclick="acceptProposal()">Yes, I will!</button>
+            <button class="button" onclick="declineProposal()">No, I won’t...</button>
+            <button class="button" style="position: absolute; bottom: 20px; left: 10px; font-size: 0.8rem; padding: 5px 10px;" onclick="goBackToBirthday()">Back to Birthday</button>
+        </div>
+        <p id="response"></p>
+    </div>
+
+    <script>
+        // Birthday Page Script
+        function createBalloons() {
+            const balloonContainer = document.getElementById('balloons');
+            for (let i = 0; i < 20; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + '%';
+                balloon.style.animationDuration = Math.random() * 5 + 5 + 's';
+                balloon.style.animationDelay = Math.random() * 3 + 's';
+                balloonContainer.appendChild(balloon);
+
+                setTimeout(() => balloon.remove(), 10000);
+            }
+        }
+
+        setInterval(createBalloons, 3000);
+
+        function goToProposal() {
+            document.getElementById('birthday-page').style.display = 'none';
+            document.getElementById('proposal-page').style.display = 'block';
+        }
+
+        // Proposal Page Script
+        let noClickCount = 0;
+
+        function acceptProposal() {
+            document.body.style.background = "linear-gradient(to right, #ff6bcb, #ff9a9e)";
+            document.getElementById('response').innerHTML = "I Love You 3000 times!!!! You Made MY DAY. 💖";
+            createFallingHearts();
+        }
+
+        function declineProposal() {
+            noClickCount++;
+            const response = document.getElementById('response');
+
+            switch (noClickCount) {
+                case 1:
+                    response.innerHTML = "Think before clicking No.";
+                    break;
+                case 2:
+                    response.innerHTML = "Please press Yes.";
+                    break;
+                case 3:
+                    response.innerHTML = "Why don't you love me?";
+                    break;
+                case 4:
+                    response.innerHTML = "Are you sure? You're gonna hate me?";
+                    break;
+                case 5:
+                    response.innerHTML = "Don't you love me? Please press Yes.";
+                    break;
+                default:
+                    document.body.classList.add('heartbroken');
+                    response.innerHTML = "You BROKE my HEART, But I still love you AS Always :) 💖";
+                    createFallingBrokenHearts();
+                    break;
+            }
+        }
+
+        function createFallingHearts() {
+            const numHearts = 50;
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💖';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 5000);
+            }
+        }
+
+        function createFallingBrokenHearts() {
+            const numBrokenHearts = 50;
+            for (let i = 0; i < numBrokenHearts; i++) {
+                const brokenHeart = document.createElement('div');
+                brokenHeart.className = 'broken-heart';
+                brokenHeart.innerHTML = '💔';
+                brokenHeart.style.left = Math.random() * 100 + '%';
+                brokenHeart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(brokenHeart);
+                setTimeout(() => brokenHeart.remove(), 5000);
+            }
+        }
+
+        function goBackToBirthday() {
+            document.getElementById('proposal-page').style.display = 'none';
+            document.getElementById('birthday-page').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
